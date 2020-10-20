@@ -17,7 +17,8 @@ import fbConfig from "./config/fbConfig";
 // react-redux-firebase config[You can as well discard this; For now, i don't know the usage]
 const rrfConfig = {
   userProfile: 'users',
-  useFirestoreForProfile: null
+  useFirestoreForProfile: true,
+  attachAuthIsReady: true
 }
 
 
@@ -41,17 +42,38 @@ const rrfProps = {
 }
 
 
-ReactDOM.render(
-  <Provider store={store}>    
-    <ReactReduxFirebaseProvider {...rrfProps}>
-      <App />
-    </ReactReduxFirebaseProvider>
-  </Provider>,
+  ReactDOM.render(
+    <Provider store={store}>    
+      <ReactReduxFirebaseProvider {...rrfProps}>
+        <App />
+      </ReactReduxFirebaseProvider>
+    </Provider>,
+  
+    document.getElementById("root")
+  );
+  
+  // If you want your app to work offline and load faster, you can change
+  // unregister() to register() below. Note this comes with some pitfalls.
+  // Learn more about service workers: https://bit.ly/CRA-PWA
+  serviceWorker.unregister();
+  
 
-  document.getElementById("root")
-);
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+
+
+
+
+// store.firebaseAuthIsReady.then(() => {
+//   ReactDOM.render(
+//       <BrowserRouter basename={baseUrl}>
+//   <Provider store={store}><App/></Provider>
+// </BrowserRouter>,
+//       rootElement);
+
+//   registerServiceWorker();
+// });
+
+
+
+//Sync Firestore--->to -->State-->using firestoreReducer
+//Sync AuthStatus--->to -->store State-->using firebaseReducer

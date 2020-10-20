@@ -25,3 +25,17 @@ textarea.materialize-textarea:focus:not([readonly]){
 border-color: #ec407a;
 box-shadow: none;
 }
+/* .right button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  text-decoration: double;
+  display: inline;
+  margin: 0;
+  padding: 0;
+}
+
+.right button:hover,
+.right button:focus {
+text-decoration: none;
+} */

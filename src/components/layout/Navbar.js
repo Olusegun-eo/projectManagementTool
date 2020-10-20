@@ -6,22 +6,23 @@ import SignedOutLinks from './SignedOutLinks';
 
 
 
-const NavBar = () => {
+const NavBar = (props) => {
+  const { auth } = props
+  // console.log(props)
   return(
     <nav className="nav-wrapper grey darken-3">
       <div className="container">
         <Link to='/' className="brand-logo">DailyPlan</Link>
-        <SignedInLinks />
-        <SignedOutLinks />
+       {links}
       </div>
     </nav>
   )
 }
 
 const mapStateToProps = (state) => {
-  console.log(state); 
+  // console.log(state); 
   return{
-    
+    auth: state.firebase.auth
   }
 }
 

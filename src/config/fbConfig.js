@@ -21,5 +21,6 @@ try {
 }catch (err) {}
 firebase.firestore();
 // firebase.analytics();
+firebase.auth()
 
 export default firebase;
