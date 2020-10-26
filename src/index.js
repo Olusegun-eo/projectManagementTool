@@ -5,6 +5,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import firebase from 'firebase/app';
 import 'firebase/firestore';
+import 'firebase/auth';
 import { createStore, applyMiddleware, compose } from "redux";
 import rootReducer from "./store/reducers/rootReducer";
 import { Provider } from "react-redux";
@@ -17,8 +18,7 @@ import fbConfig from "./config/fbConfig";
 // react-redux-firebase config[You can as well discard this; For now, i don't know the usage]
 const rrfConfig = {
   userProfile: 'users',
-  useFirestoreForProfile: true,
-  attachAuthIsReady: true
+  useFirestoreForProfile: true, attachAuthIsReady: true
 }
 
 
@@ -29,51 +29,42 @@ const store = createStore(
       // getFirebase,
       getFirestore
     })),
-    reduxFirestore(fbConfig)
+    reduxFirestore(rrfConfig, firebase)
     //OR reduxFirestore(firebase)
   )
     );
 
 const rrfProps = {
   firebase,
-  config: rrfConfig, /*here we can use fbConfig instead of rrfConfig*/
+  config: fbConfig, /*here we can use fbConfig instead of rrfConfig*/
   dispatch: store.dispatch,
   createFirestoreInstance
 }
 
+// store.firebaseAuthIsReady.then(() => {})
 
-  ReactDOM.render(
-    <Provider store={store}>    
-      <ReactReduxFirebaseProvider {...rrfProps}>
-        <App />
-      </ReactReduxFirebaseProvider>
-    </Provider>,
-  
-    document.getElementById("root")
-  );
-  
-  // If you want your app to work offline and load faster, you can change
-  // unregister() to register() below. Note this comes with some pitfalls.
-  // Learn more about service workers: https://bit.ly/CRA-PWA
-  serviceWorker.unregister();
-  
+ReactDOM.render(
+  <Provider store={store}>    
+    <ReactReduxFirebaseProvider {...rrfProps}>
+      <App />
+    </ReactReduxFirebaseProvider>
+  </Provider>,
+
+  document.getElementById("root")
+);
 
 
-
+// If you want your app to work offline and load faster, you can change
+// unregister() to register() below. Note this comes with some pitfalls.
+// Learn more about service workers: https://bit.ly/CRA-PWA
+serviceWorker.unregister();
 
 
 
-// store.firebaseAuthIsReady.then(() => {
-//   ReactDOM.render(
-//       <BrowserRouter basename={baseUrl}>
-//   <Provider store={store}><App/></Provider>
-// </BrowserRouter>,
-//       rootElement);
 
-//   registerServiceWorker();
-// });
 
 
 
 //Sync Firestore--->to -->State-->using firestoreReducer
 //Sync AuthStatus--->to -->store State-->using firebaseReducer
+//*#61# --->forwarded-->##002#

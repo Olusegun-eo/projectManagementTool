@@ -5,6 +5,7 @@ export const signIn = (credentials) => {
   return (dispatch, getState ) => {
     const firebase = getFirebase();//initailize firebase constant
   
+   
     firebase.auth().signInWithEmailAndPassword(
       credentials.email,
       credentials.password
@@ -21,6 +22,7 @@ export const signOut = () => {
   return (dispath, getState ) => {
     const firebase = getFirebase();
 
+  
     firebase.auth().signOut().then( () => {
       dispath({
         type: 'SIGNOUT_SUCCESS'
